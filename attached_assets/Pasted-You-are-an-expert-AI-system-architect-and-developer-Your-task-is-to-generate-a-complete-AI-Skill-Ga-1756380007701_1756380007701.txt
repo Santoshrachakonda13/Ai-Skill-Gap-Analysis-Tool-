@@ -1,0 +1,66 @@
+You are an expert AI system architect and developer. Your task is to generate a complete AI Skill Gap Analysis Tool project with the following specifications:
+
+Project overview:
+- An enterprise-grade AI platform for diagnosing student skill mastery and gaps.
+- Generate personalized curricula with pacing and modalities tailored to individual learners.
+- Track student progress longitudinally and predict academic performance.
+- Operate at large scale (50-200K students initially, up to 1M+ later).
+- Handle multi-subject data: math, language arts, sciences, electives.
+- Support multiple assessment types: MCQs, open-ended text, code snippets.
+- Support multilingual data, partial credit, accommodations, and adaptive testing.
+- Must provide explainable AI outputs with natural language rationales.
+- Must align skills across multiple jurisdictional skill graphs with versioning.
+- Data privacy and compliance regulations must be strictly enforced.
+
+Technical requirements:
+- System built in Python with FastAPI-based microservices architecture.
+- Core services:
+  1. Data ingestion & validation.
+  2. Knowledge mapping and skill diagnosis service with uncertainty quantification.
+  3. Curriculum generation with constraint solver.
+  4. Progress tracking and predictive analytics.
+  5. Cross-graph skill alignment.
+  6. Explainable AI and intervention recommendations.
+- Use Scikit-learn, PyTorch or TensorFlow for ML models.
+- Use LangChain for building LLM-powered explainability and curriculum generation chains.
+- PostgreSQL, Redis, Elasticsearch for data storage and caching.
+- Containerized via Docker with Kubernetes orchestration.
+- Implement authentication, authorization, and audit logging.
+- Monitoring with Prometheus, Grafana; logging with ELK stack.
+- Automated CI/CD pipelines with tests, security scans, and load testing.
+
+Performance goals:
+- Diagnostic latency ≤2.0s P95, curriculum generation ≤1.5s P95, predictions ≤800ms P95.
+- Skill classification accuracy ≥92%, curriculum relevance rating ≥4.4/5, predictive AUC ≥0.85.
+- Availability ≥99.9%, throughput ≥200 requests/second.
+- Fairness gap ≤3 percentage points across slices.
+- Support phased rollout with blue/green and canary deployments.
+
+Deliverables requested:
+- Complete backend code with microservices and API endpoints.
+- ML model training and serving code with training data simulation.
+- LangChain prompt templates and chains for explainability and curriculum generation.
+- Dockerfiles, docker-compose, Kubernetes manifest examples.
+- Database schema definitions and migration scripts.
+- Configuration for monitoring, logging, security.
+- Sample data ingestion workflows and API usage examples.
+- Test suites: unit, integration, and load tests.
+- Deployment automation scripts.
+- Documentation templates for architecture, API, deployment, and runbooks.
+
+Begin by generating:
+1. The project directory structure listing all modules and files.
+2. Docker and Kubernetes configuration files for all services.
+3. The FastAPI base application for one core service such as skill diagnosis.
+4. Sample ML model training code for student skill classification.
+5. LangChain chain and prompt templates examples for explainability.
+6. Database schema SQL for core tables.
+7. Sample API request/response payload examples.
+
+After this initial batch, proceed stepwise to generate all other items iteratively and modularly.
+
+Make sure all code is properly commented, modular, and adheres to best practices.
+
+You can split the generation into multiple stages as necessary.
+
+Begin now with the project directory structure and Docker configuration.

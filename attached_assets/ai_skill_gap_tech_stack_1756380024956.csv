@@ -1,0 +1,6 @@
+Category,Technology,Purpose
+Backend Framework,"FastAPI, SQLAlchemy, Pandas",API development and data processing
+AI/ML Libraries,"Scikit-learn, PyTorch, TensorFlow",Machine learning and neural networks
+Databases,"PostgreSQL, Redis, Elasticsearch",Data storage and search
+Infrastructure,"Docker, Kubernetes, NGINX",Containerization and orchestration
+Monitoring,"Prometheus, Grafana, ELK Stack",System monitoring and logging
