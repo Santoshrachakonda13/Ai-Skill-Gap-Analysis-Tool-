@@ -1,7 +1,10 @@
-import { Bell } from "lucide-react";
+import { Bell, LogOut } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/useAuth";
+import { useToast } from "@/hooks/use-toast";
+import { useLocation } from "wouter";
 import type { Alert } from "@/types";
 
 interface HeaderProps {
@@ -13,6 +16,18 @@ export default function Header({ title, description }: HeaderProps) {
   const { data: unreadAlerts = [] } = useQuery<Alert[]>({
     queryKey: ["/api/alerts/unread"],
   });
+  const { user, logout } = useAuth();
+  const { toast } = useToast();
+  const [, setLocation] = useLocation();
+
+  const handleLogout = () => {
+    logout();
+    toast({
+      title: "Logged Out",
+      description: "You have been successfully logged out.",
+    });
+    setLocation('/login');
+  };
 
   return (
     <header className="bg-card border-b border-border px-6 py-4">
@@ -45,16 +60,27 @@ export default function Header({ title, description }: HeaderProps) {
           </Button>
           <div className="flex items-center space-x-3">
             <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-              <span className="text-primary-foreground text-sm font-medium">JD</span>
+              <span className="text-primary-foreground text-sm font-medium">
+                {user?.name.split(' ').map(n => n[0]).join('') || 'AD'}
+              </span>
             </div>
             <div>
               <p className="text-sm font-medium text-foreground" data-testid="user-name">
-                John Doe
+                {user?.name || 'Administrator'}
               </p>
               <p className="text-xs text-muted-foreground" data-testid="user-role">
                 Administrator
               </p>
             </div>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleLogout}
+              className="text-muted-foreground hover:text-foreground"
+              data-testid="logout-button"
+            >
+              <LogOut className="h-4 w-4" />
+            </Button>
           </div>
         </div>
       </div>

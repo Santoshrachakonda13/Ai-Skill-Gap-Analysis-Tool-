@@ -10,10 +10,36 @@ import Curriculum from "@/pages/curriculum";
 import ProgressTracking from "@/pages/progress";
 import Interventions from "@/pages/interventions";
 import SettingsPage from "@/pages/settings";
+import LoginPage from "@/pages/login";
+import SignupPage from "@/pages/signup";
 import NotFound from "@/pages/not-found";
 import Sidebar from "@/components/layout/sidebar";
+import { useAuth } from "@/hooks/useAuth";
 
 function Router() {
+  const { isAuthenticated, isLoading } = useAuth();
+
+  // Show loading screen while checking authentication
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-sky-50 to-blue-100 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  // Show login/signup pages if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <Switch>
+        <Route path="/signup" component={SignupPage} />
+        <Route path="/login" component={LoginPage} />
+        <Route component={LoginPage} />
+      </Switch>
+    );
+  }
+
+  // Show main application if authenticated
   return (
     <div className="min-h-screen flex bg-gray-50">
       <Sidebar />
