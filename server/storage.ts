@@ -228,6 +228,8 @@ export class MemStorage implements IStorage {
     const student: Student = { 
       ...insertStudent, 
       id,
+      email: insertStudent.email || null,
+      riskLevel: insertStudent.riskLevel || "low",
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -275,7 +277,12 @@ export class MemStorage implements IStorage {
 
   async createSkill(insertSkill: InsertSkill): Promise<Skill> {
     const id = randomUUID();
-    const skill: Skill = { ...insertSkill, id };
+    const skill: Skill = { 
+      ...insertSkill, 
+      id,
+      description: insertSkill.description || null,
+      prerequisites: Array.isArray(insertSkill.prerequisites) ? insertSkill.prerequisites : null
+    };
     this.skills.set(id, skill);
     return skill;
   }
@@ -294,6 +301,7 @@ export class MemStorage implements IStorage {
     const assessment: Assessment = { 
       ...insertAssessment, 
       id,
+      timeSpent: insertAssessment.timeSpent || null,
       completedAt: new Date(),
     };
     this.assessments.set(id, assessment);
@@ -373,6 +381,8 @@ export class MemStorage implements IStorage {
     const plan: CurriculumPlan = { 
       ...insertPlan, 
       id,
+      weeks: Array.isArray(insertPlan.weeks) ? insertPlan.weeks : [],
+      aiRecommendation: insertPlan.aiRecommendation || null,
       createdAt: new Date(),
     };
     this.curriculumPlans.set(id, plan);
@@ -389,6 +399,8 @@ export class MemStorage implements IStorage {
     const progress: ProgressTracking = { 
       ...insertProgress, 
       id,
+      previousScore: insertProgress.previousScore || null,
+      improvement: insertProgress.improvement || null,
       trackedAt: new Date(),
     };
     this.progressTracking.set(id, progress);
@@ -405,6 +417,7 @@ export class MemStorage implements IStorage {
     const alert: Alert = { 
       ...insertAlert, 
       id,
+      isRead: insertAlert.isRead || false,
       createdAt: new Date(),
     };
     this.alerts.set(id, alert);
@@ -412,9 +425,11 @@ export class MemStorage implements IStorage {
   }
 
   async getAllAlerts(): Promise<Alert[]> {
-    return Array.from(this.alerts.values()).sort((a, b) => 
-      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    );
+    return Array.from(this.alerts.values()).sort((a, b) => {
+      const aTime = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+      const bTime = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+      return bTime - aTime;
+    });
   }
 
   async getUnreadAlerts(): Promise<Alert[]> {

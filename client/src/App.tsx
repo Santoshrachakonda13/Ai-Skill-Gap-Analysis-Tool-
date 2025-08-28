@@ -7,6 +7,9 @@ import Dashboard from "@/pages/dashboard";
 import Students from "@/pages/students";
 import Assessments from "@/pages/assessments";
 import Curriculum from "@/pages/curriculum";
+import ProgressTracking from "@/pages/progress";
+import Interventions from "@/pages/interventions";
+import SettingsPage from "@/pages/settings";
 import NotFound from "@/pages/not-found";
 import Sidebar from "@/components/layout/sidebar";
 
@@ -20,6 +23,9 @@ function Router() {
           <Route path="/students" component={Students} />
           <Route path="/assessments" component={Assessments} />
           <Route path="/curriculum" component={Curriculum} />
+          <Route path="/progress" component={ProgressTracking} />
+          <Route path="/interventions" component={Interventions} />
+          <Route path="/settings" component={SettingsPage} />
           <Route component={NotFound} />
         </Switch>
       </main>
