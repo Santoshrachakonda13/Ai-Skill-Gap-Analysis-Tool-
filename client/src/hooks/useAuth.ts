@@ -60,8 +60,11 @@ export function useAuth() {
       throw new Error('Invalid credentials');
     }
 
-    setUser(mockUser);
     localStorage.setItem('auth_user', JSON.stringify(mockUser));
+    setUser(mockUser);
+    
+    // Ensure state update is processed
+    await new Promise(resolve => setTimeout(resolve, 100));
     return mockUser;
   };
 
@@ -73,8 +76,11 @@ export function useAuth() {
       ? MOCK_USERS['google.user@gmail.com']
       : MOCK_USERS['apple.user@icloud.com'];
 
-    setUser(mockUser);
     localStorage.setItem('auth_user', JSON.stringify(mockUser));
+    setUser(mockUser);
+    
+    // Ensure state update is processed
+    await new Promise(resolve => setTimeout(resolve, 100));
     return mockUser;
   };
 

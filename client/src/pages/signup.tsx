@@ -60,7 +60,10 @@ export default function SignupPage() {
         title: "Account Created",
         description: "Welcome to AI SkillGap Analytics!",
       });
-      setLocation('/');
+      // Allow React to process the authentication state change
+      setTimeout(() => {
+        setLocation('/');
+      }, 200);
     } catch (error) {
       toast({
         title: "Signup Failed",
@@ -81,7 +84,10 @@ export default function SignupPage() {
         title: "Account Created",
         description: `Welcome! Your account has been created via ${provider}.`,
       });
-      setLocation('/');
+      // Allow React to process the authentication state change
+      setTimeout(() => {
+        setLocation('/');
+      }, 200);
     } catch (error) {
       toast({
         title: "Signup Failed",

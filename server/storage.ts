@@ -281,7 +281,7 @@ export class MemStorage implements IStorage {
       ...insertSkill, 
       id,
       description: insertSkill.description || null,
-      prerequisites: Array.isArray(insertSkill.prerequisites) ? insertSkill.prerequisites : null
+      prerequisites: Array.isArray(insertSkill.prerequisites) ? insertSkill.prerequisites as string[] : null
     };
     this.skills.set(id, skill);
     return skill;
@@ -381,7 +381,7 @@ export class MemStorage implements IStorage {
     const plan: CurriculumPlan = { 
       ...insertPlan, 
       id,
-      weeks: Array.isArray(insertPlan.weeks) ? insertPlan.weeks : [],
+      weeks: Array.isArray(insertPlan.weeks) ? insertPlan.weeks as CurriculumWeek[] : [],
       aiRecommendation: insertPlan.aiRecommendation || null,
       createdAt: new Date(),
     };
