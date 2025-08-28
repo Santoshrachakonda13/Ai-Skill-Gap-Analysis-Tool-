@@ -55,7 +55,13 @@ export function useAuth() {
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    const mockUser = MOCK_USERS[email as keyof typeof MOCK_USERS];
+    // Allow admin@myonsite.com with any password, or exact match for others
+    let mockUser = MOCK_USERS[email as keyof typeof MOCK_USERS];
+    
+    if (!mockUser && email === 'admin@myonsite.com') {
+      mockUser = MOCK_USERS['admin@myonsite.com'];
+    }
+    
     if (!mockUser) {
       throw new Error('Invalid credentials');
     }
@@ -63,8 +69,8 @@ export function useAuth() {
     localStorage.setItem('auth_user', JSON.stringify(mockUser));
     setUser(mockUser);
     
-    // Ensure state update is processed
-    await new Promise(resolve => setTimeout(resolve, 100));
+    // Force a re-render by triggering the effect
+    window.dispatchEvent(new Event('auth-change'));
     return mockUser;
   };
 
@@ -79,8 +85,8 @@ export function useAuth() {
     localStorage.setItem('auth_user', JSON.stringify(mockUser));
     setUser(mockUser);
     
-    // Ensure state update is processed
-    await new Promise(resolve => setTimeout(resolve, 100));
+    // Force a re-render by triggering the effect
+    window.dispatchEvent(new Event('auth-change'));
     return mockUser;
   };
 
@@ -104,6 +110,7 @@ export function useAuth() {
   const logout = () => {
     setUser(null);
     localStorage.removeItem('auth_user');
+    window.dispatchEvent(new Event('auth-change'));
   };
 
   return {

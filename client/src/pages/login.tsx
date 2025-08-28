@@ -27,11 +27,10 @@ export default function LoginPage() {
         title: "Login Successful",
         description: "Welcome back to AI SkillGap Analytics!",
       });
-      // Allow React to process the authentication state change
-      setTimeout(() => {
-        setLocation('/');
-      }, 200);
+      // Immediate redirect after successful login
+      setLocation('/');
     } catch (error) {
+      console.error('Login error:', error);
       toast({
         title: "Login Failed",
         description: "Please check your credentials and try again.",
@@ -51,11 +50,10 @@ export default function LoginPage() {
         title: "Login Successful",
         description: `Welcome back via ${provider}!`,
       });
-      // Allow React to process the authentication state change
-      setTimeout(() => {
-        setLocation('/');
-      }, 200);
+      // Immediate redirect after successful login
+      setLocation('/');
     } catch (error) {
+      console.error('Provider login error:', error);
       toast({
         title: "Login Failed",
         description: `Failed to login with ${provider}. Please try again.`,

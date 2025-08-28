@@ -46,6 +46,10 @@ export default function Header({ title, description }: HeaderProps) {
             size="icon"
             className="relative"
             data-testid="notifications-button"
+            onClick={() => {
+              console.log('Opening notifications');
+              alert(`You have ${unreadAlerts.length} unread notifications`);
+            }}
           >
             <Bell className="h-5 w-5" />
             {unreadAlerts.length > 0 && (

@@ -60,7 +60,18 @@ export default function StudentTable() {
               />
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             </div>
-            <Button data-testid="export-button">
+            <Button 
+              data-testid="export-button"
+              onClick={() => {
+                // Export functionality
+                console.log('Exporting student data...');
+                const csvData = 'Student ID,Name,Grade,Risk Level,Math Score,Language Arts Score,Science Score,Last Assessment\n';
+                const link = document.createElement('a');
+                link.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvData);
+                link.download = 'students.csv';
+                link.click();
+              }}
+            >
               <Download className="h-4 w-4 mr-2" />
               Export Data
             </Button>
@@ -151,6 +162,10 @@ export default function StudentTable() {
                       size="sm" 
                       className="text-primary hover:text-primary/80 mr-2"
                       data-testid={`view-details-${student.id}`}
+                      onClick={() => {
+                        console.log(`Viewing details for student ${student.id}`);
+                        alert(`Viewing details for ${student.firstName} ${student.lastName}`);
+                      }}
                     >
                       View Details
                     </Button>
@@ -159,6 +174,10 @@ export default function StudentTable() {
                       size="sm" 
                       className="text-green-600 hover:text-green-800"
                       data-testid={`generate-plan-${student.id}`}
+                      onClick={() => {
+                        console.log(`Generating plan for student ${student.id}`);
+                        alert(`Generating learning plan for ${student.firstName} ${student.lastName}`);
+                      }}
                     >
                       Generate Plan
                     </Button>
